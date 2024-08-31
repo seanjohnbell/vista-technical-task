@@ -1,0 +1,209 @@
+$record: #1af546;
+$record-background: #1af54640;
+$stop: #eb2c2c;
+$stop-background: #eb2c2c40;
+$review: #0c87f2;
+$review-background: #0c87f240;
+
+@function focusStyle($color) {
+  @return 0 0 0 2px #fff, 0 0 0 4px $color;
+}
+
+@keyframes activeButton {
+  from { opacity: 1; }
+  to { opacity: 0.4; }
+}
+
+.App {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 0.75em;
+  h3, h4 {
+    margin: 1em 0;
+  }
+  textarea {
+    width: calc(100% - 4px);
+    resize: vertical;
+    transition: all 0.25s ease-in-out;
+    &:hover, &:focus {
+      outline: 0;
+      box-shadow: focusStyle($review);
+    }
+  }
+  
+  .buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1em;
+  }
+  
+  .button-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 0;
+    gap: 0.5em;
+    button {
+      width: 2em;
+      height: 2em;
+      flex-shrink: 0;
+      border-radius: 1.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease-in-out;
+      cursor: pointer;
+      &.record {
+        border: 1px solid $record;
+        color: $record;
+        background-color: $record-background;
+        &:hover, &:focus {
+          outline: 0;
+          box-shadow: focusStyle($record);
+        }
+      }
+      &.stop {
+        border: 1px solid $stop;
+        color: $stop;
+        background-color: $stop-background;
+        &:hover, &:focus {
+          outline: 0;
+          box-shadow: focusStyle($stop);
+        }
+      }
+      &.review {
+        border: 1px solid $review;
+        color: $review;
+        background-color: $review-background;
+        &:hover, &:focus {
+          outline: 0;
+          box-shadow: focusStyle($review);
+        }
+        &:active {
+          animation: activeButton 600ms alternate infinite;  
+        }
+      }
+      &.active {
+        animation: activeButton 600ms alternate infinite;
+      }
+      &:disabled,
+      &[disabled]{
+        border: 1px solid #999;
+        background-color: #ccc;
+        color: #666;
+        cursor: not-allowed;
+        &:hover, &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+    label {
+      cursor: pointer;
+      &.disabled-label {
+        cursor: not-allowed;
+      }
+    }
+  }
+  
+  .submit-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75em;
+    margin-bottom: 1em;
+    input {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 15px;
+      height: 15px;
+      margin: 0;
+      border: 1px solid $review;
+      border-radius: 50%;
+      outline: none;
+      transition: all 0.25s ease-in-out;
+      cursor: pointer;
+      &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+      &:hover, &:focus {
+        box-shadow: 0 0 0 0.6em #fff, 0 0 0 0.75em $review;
+      }
+      &:checked:before {
+        background-color: $review;
+      }
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+  
+  .radio-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75em;
+    label {
+      cursor: pointer;
+      &.disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+  
+  .submit-button {
+    max-width: 20em;
+    padding: 0.75em;
+    border-radius: 0.75em;
+    text-transform: uppercase;
+    border: 1px solid $review;
+    color: $review;
+    background-color: $review-background;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    font-weight: 600;
+    &:hover, &:focus {
+      outline: 0;
+      box-shadow: focusStyle($review);
+    }
+    &:disabled {
+      border: 1px solid #999;
+      background-color: #ccc;
+      color: #666;
+      cursor: not-allowed;
+      &:hover, &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+  @media (max-width: 350px) {
+    text-align: left;
+    .buttons-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+    }
+  
+    .button-wrapper {
+      flex-direction: row;
+      gap: 0.5em;
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      flex: 1 1 auto;
+      text-align: left;
+    }
+  
+    .submit-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: left;
+      gap: 0.75em;
+    }
+  }
+}
